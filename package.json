@@ -1,0 +1,78 @@
+{
+  "name": "express-libp2p",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "bin": {
+    "express-libp2p": "dist/main.js"
+  },
+  "pkg": {
+    "scripts": [
+      "dist/**/*.js"
+    ],
+    "assets": [
+      "dist/**/*",
+      ".env"
+    ],
+    "targets": [
+      "node20-mac-arm64"
+    ],
+    "outputPath": "dist-pkg",
+    "options": [
+      "--compress",
+      "GZip"
+    ]
+  },
+  "scripts": {
+    "test": "vitest",
+    "dev": "tsx src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js", 
+    "pkg": "npx @yao-pkg/pkg .",
+    "start:bootstrap": "tsx src/bootstrap-nodes.ts",
+    "stop": "pkill -f 'main.ts'",
+    "build:fullbundle": "esbuild src/main.ts --bundle --platform=node --outfile=dist/libp2p.fullbundle.js --format=esm",
+    "build:bundle": "esbuild src/main.ts --bundle --platform=node --format=esm --outfile=dist/libp2p.bundle.js --external:express --external:body-parser --external:dotenv --external:libp2p --external:@libp2p/* --external:@chainsafe/* --external:tweetnacl --external:axios --external:bs58 --external:@multiformats/*",
+    "build:bootstrap": "esbuild src/bootstrap-nodes.ts --bundle --platform=node --format=esm --outfile=dist/libp2p.bootstrap.bundle.js --external:express --external:body-parser --external:dotenv --external:libp2p --external:@libp2p/* --external:@chainsafe/* --external:tweetnacl --external:axios --external:bs58 --external:@multiformats/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "dependencies": {
+    "@chainsafe/libp2p-gossipsub": "^14.1.1",
+    "@chainsafe/libp2p-noise": "^16.1.3",
+    "@chainsafe/libp2p-yamux": "^7.0.2",
+    "@libp2p/autonat": "^2.0.37",
+    "@libp2p/bootstrap": "^11.0.42",
+    "@libp2p/circuit-relay-v2": "^3.2.20",
+    "@libp2p/crypto": "^5.1.6",
+    "@libp2p/identify": "^3.0.36",
+    "@libp2p/interface": "^2.10.5",
+    "@libp2p/interface-pubsub": "^4.0.1",
+    "@libp2p/kad-dht": "^15.1.6",
+    "@libp2p/peer-id": "^5.1.7",
+    "@libp2p/peer-id-factory": "^4.2.4",
+    "@libp2p/ping": "^2.0.36",
+    "@libp2p/tcp": "^10.1.16",
+    "@multiformats/multiaddr": "^12.5.0",
+    "axios": "^1.10.0",
+    "body-parser": "^2.2.0",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "libp2p": "^2.8.11",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.6",
+    "@types/express": "^5.0.3",
+    "@types/jest": "^30.0.0",
+    "esbuild": "^0.25.5",
+    "jest": "^30.0.2",
+    "ts-jest": "^29.4.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}
