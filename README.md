@@ -53,3 +53,27 @@ pnpm run start:bootstrap
 ```
 pnpm run build:bootstrap
 ```
+## Go Implementation
+The `go-project` directory contains a standalone Go version of the server. Due to sandbox restrictions it relies on an in-memory pub/sub implementation instead of `go-libp2p`. The service exposes `/libp2p/send` for publishing messages.
+
+Build the Go project:
+```bash
+cd go-project
+go build
+```
+
+Run the server with:
+```bash
+./go-project
+```
+
+To build a standalone executable with a custom name run:
+```bash
+cd go-project
+go build -o libp2p-server
+```
+This produces a `libp2p-server` binary in the `go-project` directory that can be
+copied and executed on the same platform. Use standard Go `GOOS` and `GOARCH`
+environment variables if you need to cross-compile for another OS or CPU
+architecture.
+
